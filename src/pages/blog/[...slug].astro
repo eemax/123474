@@ -22,8 +22,9 @@ export async function getStaticPaths() {
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);
+const readingTime = Math.max(1, Math.ceil((post.body?.split(/\s+/).length ?? 0) / 230));
 ---
 
-<Post post={post} headings={headings} prevPost={prevPost} nextPost={nextPost}>
+<Post post={post} headings={headings} prevPost={prevPost} nextPost={nextPost} readingTime={readingTime}>
   <Content />
 </Post>

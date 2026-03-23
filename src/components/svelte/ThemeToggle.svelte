@@ -3,6 +3,11 @@
 
   $effect(() => {
     dark = document.documentElement.classList.contains("dark");
+    const sync = () => {
+      dark = document.documentElement.classList.contains("dark");
+    };
+    document.addEventListener("astro:after-swap", sync);
+    return () => document.removeEventListener("astro:after-swap", sync);
   });
 
   function toggle() {

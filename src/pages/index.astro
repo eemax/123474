@@ -11,7 +11,13 @@ const sorted = posts
   .slice(0, 6);
 ---
 
-<Base title="123474.xyz">
+<Base title="123474.xyz" jsonLd={{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "123474.xyz",
+  url: "https://123474.xyz",
+  description: "Personal blog and project showcase. Writing about AI dev, tooling, and things I build.",
+}}>
   <!-- Hero -->
   <section class="mb-16">
     <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">

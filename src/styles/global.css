@@ -68,4 +68,20 @@
   a:hover {
     text-decoration-color: var(--fg);
   }
+
+  ::view-transition-old(root) {
+    animation: vt-fade-out 150ms ease-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-fade-in 150ms ease-in;
+  }
+
+  @keyframes vt-fade-out {
+    to { opacity: 0; }
+  }
+
+  @keyframes vt-fade-in {
+    from { opacity: 0; }
+  }
 }
