@@ -1,0 +1,59 @@
+---
+import Base from "../layouts/Base.astro";
+import BlogCard from "../components/BlogCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+import { projects } from "../data/projects";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sorted = posts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 6);
+---
+
+<Base title="123474.xyz">
+  <!-- Hero -->
+  <section class="mb-16">
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      123474.xyz
+    </h1>
+    <p class="mt-3 text-lg text-(--muted)">
+      Personal blog and project showcase. Writing about AI dev, tooling, and things I build.
+    </p>
+  </section>
+
+  <!-- Recent Posts -->
+  <section class="mb-16">
+    <div class="mb-6 flex items-baseline justify-between">
+      <h2 class="font-mono text-xs font-semibold uppercase tracking-wider text-(--muted)">
+        Recent Posts
+      </h2>
+      <a href="/blog" class="text-sm text-(--muted) transition-colors hover:text-(--fg)">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="space-y-3">
+      {sorted.map((post) => (
+        <BlogCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          tags={post.data.tags}
+          slug={post.id}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section>
+    <h2 class="mb-6 font-mono text-xs font-semibold uppercase tracking-wider text-(--muted)">
+      Projects
+    </h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {projects.map((project) => (
+        <ProjectCard {...project} />
+      ))}
+    </div>
+  </section>
+</Base>

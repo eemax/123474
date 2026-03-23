@@ -1,0 +1,25 @@
+---
+import Base from "../../layouts/Base.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const sorted = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Blog" description="All blog posts.">
+  <section>
+    <h1 class="mb-8 text-3xl font-bold tracking-tight">Blog</h1>
+    <div class="space-y-3">
+      {sorted.map((post) => (
+        <BlogCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          tags={post.data.tags}
+          slug={post.id}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

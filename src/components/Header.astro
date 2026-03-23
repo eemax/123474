@@ -1,0 +1,30 @@
+---
+import ThemeToggle from "./svelte/ThemeToggle.svelte";
+import Search from "./svelte/Search.svelte";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/blog", label: "Blog" },
+];
+---
+
+<header data-pagefind-ignore class="sticky top-0 z-40 border-b border-(--border) bg-(--bg)/80 backdrop-blur-md">
+  <div class="mx-auto flex h-14 max-w-3xl items-center justify-between px-6">
+    <a href="/" class="font-mono text-sm font-semibold tracking-tight no-underline">
+      123474.xyz
+    </a>
+
+    <nav class="flex items-center gap-5">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class="text-sm text-(--muted) no-underline transition-colors hover:text-(--fg)"
+        >
+          {label}
+        </a>
+      ))}
+      <Search client:load />
+      <ThemeToggle client:load />
+    </nav>
+  </div>
+</header>
